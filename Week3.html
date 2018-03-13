@@ -1,0 +1,67 @@
+<!-- Noviani Litriani (2001594623)-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Week 3</title>
+	<script type="text/javascript" src="babylon.custom.js"></script>
+	<script type="text/javascript" src="initScene.js"></script>
+	<script type="text/javascript" src="material.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script type="text/javascript">
+		var code = 0;
+		window.onkeydown = function(event) {
+			code = event.keyCode
+			// console.log(code);
+			// alert(String.fromCharCode(event.keyCode)+ " --> " + code);
+		}
+		// window.onkeyup = function(event) {
+			
+		// 	alert(String.fromCharCode(event.keyCode)+ " --> " + event.keyCode);
+		// }
+	</script>
+</head>
+<body>
+	<canvas id="renderCanvas"></canvas>
+	<script>
+		var canvas, engine, scene, camera;
+		document.addEventListener('DOMContentLoaded', function() {
+
+			createScene();
+
+			var mat = createMat(scene);
+
+			var box = new BABYLON.Mesh.CreateBox('box', 2.0, scene);
+			box.position = new BABYLON.Vector3(0,0,0);
+			box.material = mat;
+
+			engine.runRenderLoop(function() {
+
+				if(code==null) {
+					box.position.x = box.position.x;
+				}				
+				// press a - going left
+				else if (code == 65) {
+					box.position.x = box.position.x + 0.5;
+				}
+				// press w - going up
+				else if (code == 87) {
+					box.position.y = box.position.y + 0.5;
+				}
+				// press d - going right
+				else if (code == 68) {
+					box.position.x = box.position.x - 0.5;
+				}
+				// press s - going down
+				else if (code == 83) {
+					box.position.y = box.position.y - 0.5;
+				}
+
+				code = 0;
+				scene.render();
+			});
+		});
+
+	</script>
+</body>
+</html>
